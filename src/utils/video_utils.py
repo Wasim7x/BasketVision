@@ -39,7 +39,7 @@ def save_video(ouput_video_frames,output_video_path: str):
     """
     # If folder doesn't exist, create it
     if not os.path.exists(output_video_path):
-        os.makedirs(os.path.dirname(output_video_path))
+        os.makedirs(os.path.dirname(output_video_path), exist_ok=True)
 
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
     out = cv2.VideoWriter(output_video_path, fourcc, 24, (ouput_video_frames[0].shape[1], ouput_video_frames[0].shape[0]))
