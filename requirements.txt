@@ -1,4 +1,5 @@
 ultralytics
 opencv-python
-supervision   
-pickle5 
+supervision    
+transformers
+pillow
