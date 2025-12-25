@@ -44,6 +44,8 @@ class PlayerTracksDrawer:
 
             player_assignment_for_frame = player_assignment[frame_num]
 
+            player_id_has_ball = ball_aquisition[frame_num] 
+
             # Draw Players
             for track_id, player in player_dict.items():
                 team_id = player_assignment_for_frame.get(track_id,self.default_player_team_id)
@@ -52,6 +54,9 @@ class PlayerTracksDrawer:
                     color = self.team_1_color
                 else:
                     color = self.team_2_color
+
+                if track_id == player_id_has_ball:  
+                    frame = draw_traingle(frame, player["bbox"],(0, 0, 255))
 
                 frame = draw_ellipse(frame, player["bbox"],color, track_id)
 

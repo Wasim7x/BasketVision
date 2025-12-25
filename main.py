@@ -4,6 +4,7 @@ from src.trackers.ball_tracker import BallTracker
 from src.drawers.players_track_drawer import PlayerTracksDrawer
 from src.drawers.ball_tracks_drawer import BallTracksDrawer
 from src.team_assigner.team_assigner import TeamAssigner
+from src.ball_aquisition.ball_aquisition_detector import BallAquisitionDetector
 
 def main():
     
@@ -15,7 +16,7 @@ def main():
     player_tracker = PlayerTracker(model_path="models\\ball_detector_model.pt")
     ball_tracker = BallTracker(model_path="models\\ball_detector_model.pt")
     # run trackers
-    run_player_tracks = player_tracker.get_object_tracks(video_frames,
+    player_tracks = player_tracker.get_object_tracks(video_frames,
                                                          read_from_stub=True,
                                                          stub_path="stubs\\player_tracks_stub.pkl")
     ball_tracks = ball_tracker.get_object_tracks(video_frames,
@@ -28,9 +29,14 @@ def main():
     # assign player teams
     team_assigner = TeamAssigner()
     player_assigment = team_assigner.get_player_teams_across_frames(video_frames,
-                                                        run_player_tracks,
+                                                        player_tracks,
                                                         read_from_stub=True, 
                                                         stub_path="stubs\\player_team_assignment_stub.pkl")
+    
+    # detect ball aquisition
+    ball_aquisition_detector = BallAquisitionDetector()
+    ball_aquisition = ball_aquisition_detector.detect_ball_possession(player_tracks, ball_tracks)
+    print(ball_aquisition)
 
                                  
     # draw outputs
@@ -40,8 +46,9 @@ def main():
 
     # draw player tracks
     output_video_frames = player_tracker_drawer.draw(video_frames,
-                                                run_player_tracks,
-                                                player_assigment)
+                                                player_tracks,
+                                                player_assigment,
+                                                ball_aquisition)
     # draw ball tracks
     output_video_frames = ball_tracker_drawer.draw(output_video_frames,
                                             ball_tracks)
