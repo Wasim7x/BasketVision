@@ -3,3 +3,4 @@ opencv-python
 supervision    
 transformers
 pillow
+numpy
