@@ -10,7 +10,8 @@ from src.pass_and_interception_detector.pass_and_interception_detector import Pa
 from src.drawers.pass_interception_drawer import PassInterceptionDrawer
 from src.court_keypoint_detector.court_keypoint_detector import CourtKeypointDetector
 from src.drawers.court_keypoint_drawer import CourtKeypointDrawer
-
+from src.tactical_veiw_convertor.tactical_view_convertor import TacticalViewConverter
+from src.drawers.tactical_view_drawer import TacticalViewDrawer
 def main():
     
     #Read video
@@ -54,6 +55,10 @@ def main():
     passes = pass_and_interception_detector.detect_passes(ball_aquisition, player_assigment)
     interceptions = pass_and_interception_detector.detect_interceptions(ball_aquisition, player_assigment)  
 
+    # tactical view
+    tactical_view_converter = TacticalViewConverter(court_image_path="D:\\project\\BasketVision\\images\\basketball_court.png")
+    court_keypoint = tactical_view_converter.validate_keypoints(court_keypoint)
+
                                  
     # draw outputs
     #initialize drawer
@@ -62,6 +67,7 @@ def main():
     team_ball_control_drawer = TeamBallControlDrawer()
     pass_interception_drawer = PassInterceptionDrawer()
     court_keypoint_drawer = CourtKeypointDrawer()
+    tactical_view_drawer = TacticalViewDrawer()
 
     # draw player tracks
     output_video_frames = player_tracker_drawer.draw(video_frames,
@@ -85,6 +91,12 @@ def main():
     # draw court keypoints
     output_video_frames = court_keypoint_drawer.draw(output_video_frames,
                                                     court_keypoint)
+    
+    output_video_frames = tactical_view_drawer.draw(output_video_frames,
+                                                    tactical_view_converter.court_image_path,
+                                                    tactical_view_converter.width,
+                                                    tactical_view_converter.height,
+                                                    tactical_view_converter.key_points)
     
 
     video_utils.save_video(output_video_frames,"output//output_video_tracked.mp4")
