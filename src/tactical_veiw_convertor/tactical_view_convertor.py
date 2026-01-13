@@ -5,6 +5,7 @@ import pathlib
 import numpy as np
 import cv2
 from copy import deepcopy
+from .homogrophy import Homography
 
 
 folder_path = pathlib.Path(__file__).parent.resolve()
@@ -68,7 +69,14 @@ class TacticalViewConverter:
         keypoints_list = deepcopy(keypoints_list)
 
         for frame_idx, frame_keypoints in enumerate(keypoints_list):
-            frame_keypoints = frame_keypoints.xy.tolist()[0]
+            if frame_keypoints is None:
+                continue
+            if not hasattr(frame_keypoints, "xy"):
+                continue
+            arr = frame_keypoints.xy.tolist()
+            if len(arr) == 0:
+                continue
+            frame_keypoints = arr[0]      
             
             # Get indices of detected keypoints (not (0, 0))
             detected_indices = [i for i, kp in enumerate(frame_keypoints) if kp[0] >0 and kp[1]>0]
@@ -133,8 +141,15 @@ class TacticalViewConverter:
         for frame_idx, (frame_keypoints, frame_tracks) in enumerate(zip(keypoints_list, player_tracks)):
             # Initialize empty dictionary for this frame
             tactical_positions = {}
-
-            frame_keypoints = frame_keypoints.xy.tolist()[0]
+    
+            if frame_keypoints is None:
+                continue
+            if not hasattr(frame_keypoints, "xy"):
+                continue
+            arr = frame_keypoints.xy.tolist()
+            if len(arr) == 0:
+                continue
+            frame_keypoints = arr[0] 
 
             # Skip frames with insufficient keypoints
             if frame_keypoints is None or len(frame_keypoints) == 0:

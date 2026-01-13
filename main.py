@@ -12,15 +12,18 @@ from src.court_keypoint_detector.court_keypoint_detector import CourtKeypointDet
 from src.drawers.court_keypoint_drawer import CourtKeypointDrawer
 from src.tactical_veiw_convertor.tactical_view_convertor import TacticalViewConverter
 from src.drawers.tactical_view_drawer import TacticalViewDrawer
+from src.speed_distance_calculator.speed_distance_calculator import SpeedAndDistanceCalculator
+from src.drawers.speed_distance_drawer import SpeedAndDistanceDrawer
+
 def main():
     
     #Read video
     video_frames = video_utils.read_video("D:\\project\\BasketVision\\data\\input-videos\\video_3.mp4")
     
     #Initialize Tracker
-    player_tracker = PlayerTracker(model_path="models\\ball_detector_model.pt")
+    player_tracker = PlayerTracker(model_path="models\\player_detector (1).pt")
     ball_tracker = BallTracker(model_path="models\\ball_detector_model.pt")
-    court_keypoint_detector = CourtKeypointDetector(model_path="models\\court_keypoint_detection.pt")
+    court_keypoint_detector = CourtKeypointDetector(model_path="models\\court_keypoint_detector (1).pt")
     
     # run trackers
     player_tracks = player_tracker.get_object_tracks(video_frames,
@@ -58,8 +61,19 @@ def main():
     # tactical view
     tactical_view_converter = TacticalViewConverter(court_image_path="D:\\project\\BasketVision\\images\\basketball_court.png")
     court_keypoint = tactical_view_converter.validate_keypoints(court_keypoint)
+    tactical_player_positions = tactical_view_converter.transform_players_to_tactical_view(court_keypoint, player_tracks)
 
-                                 
+    # speed and distance calculation
+    speed_distance_calculator = SpeedAndDistanceCalculator(
+                                   tactical_view_converter.width,
+                                   tactical_view_converter.height,
+                                   tactical_view_converter.actual_height_in_meters,
+                                   tactical_view_converter.actual_width_in_meters)
+    
+    player_distance_per_frame = speed_distance_calculator.calculate_distance(tactical_player_positions)
+    player_speed_per_frame = speed_distance_calculator.calculate_speed(player_distance_per_frame)
+
+    
     # draw outputs
     #initialize drawer
     player_tracker_drawer = PlayerTracksDrawer()
@@ -68,6 +82,7 @@ def main():
     pass_interception_drawer = PassInterceptionDrawer()
     court_keypoint_drawer = CourtKeypointDrawer()
     tactical_view_drawer = TacticalViewDrawer()
+    speed_distance_drawer = SpeedAndDistanceDrawer()
 
     # draw player tracks
     output_video_frames = player_tracker_drawer.draw(video_frames,
@@ -92,12 +107,20 @@ def main():
     output_video_frames = court_keypoint_drawer.draw(output_video_frames,
                                                     court_keypoint)
     
+    output_video_frames = speed_distance_drawer.draw(output_video_frames,
+                                                    player_tracks,
+                                                    player_distance_per_frame,
+                                                    player_speed_per_frame)
+    
+
     output_video_frames = tactical_view_drawer.draw(output_video_frames,
                                                     tactical_view_converter.court_image_path,
                                                     tactical_view_converter.width,
                                                     tactical_view_converter.height,
-                                                    tactical_view_converter.key_points)
-    
+                                                    tactical_view_converter.key_points,
+                                                    tactical_player_positions,
+                                                    player_assigment,
+                                                    ball_aquisition)
 
     video_utils.save_video(output_video_frames,"output//output_video_tracked.mp4")
 
