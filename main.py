@@ -80,6 +80,7 @@ def main():
     ball_tracker_drawer = BallTracksDrawer()
     team_ball_control_drawer = TeamBallControlDrawer()
     pass_interception_drawer = PassInterceptionDrawer()
+    # frame_number_drawer = video_utils.FrameNumberDrawer()
     court_keypoint_drawer = CourtKeypointDrawer()
     tactical_view_drawer = TacticalViewDrawer()
     speed_distance_drawer = SpeedAndDistanceDrawer()
@@ -91,7 +92,13 @@ def main():
                                                 ball_aquisition)
     # draw ball tracks
     output_video_frames = ball_tracker_drawer.draw(output_video_frames,
-                                            ball_tracks)
+                                                    ball_tracks)
+    # draw frame number
+
+
+    # draw court keypoints
+    output_video_frames = court_keypoint_drawer.draw(output_video_frames,
+                                                    court_keypoint)
     
     # draw team ball control
     output_video_frames = team_ball_control_drawer.draw(output_video_frames,
@@ -102,10 +109,6 @@ def main():
     output_video_frames = pass_interception_drawer.draw(output_video_frames,
                                                         passes,
                                                         interceptions)
-    
-    # draw court keypoints
-    output_video_frames = court_keypoint_drawer.draw(output_video_frames,
-                                                    court_keypoint)
     
     output_video_frames = speed_distance_drawer.draw(output_video_frames,
                                                     player_tracks,
