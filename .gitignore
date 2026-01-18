@@ -7,3 +7,6 @@ output/
 models/
 logs/
 test.py
+keypoint_test/
+build/
+BasketVision.egg-info/

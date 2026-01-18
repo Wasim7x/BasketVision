@@ -1,0 +1,13 @@
+[project]
+name = "src"
+version = "0.0.1"
+description = "AI-powered basketball match analysis using computer vision—player & ball tracking, 
+                court understanding, team assignment, and game-event detection with real-time visualizations."
+                
+authors = [{name = "wasim hassan", email = "wasim7x@gmail.com"}]
+
+[tool.setuptools]
+packages = {find = {}}
+
+[tool.setuptools.dynamic]
+dependencies = {file = "requirements.txt"}

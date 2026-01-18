@@ -5,3 +5,5 @@ transformers
 pillow
 numpy
 from-root
+
+-e .
