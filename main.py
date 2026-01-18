@@ -63,7 +63,7 @@ def main():
                                                  read_from_stub=True,
                                                  stub_path="stubs\\ball_tracks_stub.pkl")
     logging.info("Running Court Keypoint Detector")
-    court_keypoint = court_keypoint_detector.get_court_keypoints(video_frames,
+    detected_court_keypoint = court_keypoint_detector.get_court_keypoints(video_frames,
                                                                 read_from_stub=True,
                                                                 stub_path="stubs\\court_keypoints_stub.pkl")
  
@@ -92,8 +92,10 @@ def main():
     # tactical view
     logging.info("Transforming Player Positions to Tactical View")
     tactical_view_converter = TacticalViewConverter(court_image_path="D:\\project\\BasketVision\\images\\basketball_court.png")
-    court_keypoint = tactical_view_converter.validate_keypoints(court_keypoint)
+    court_keypoint = tactical_view_converter.validate_keypoints(detected_court_keypoint)
     tactical_player_positions = tactical_view_converter.transform_players_to_tactical_view(court_keypoint, player_tracks)
+    
+    
 
     # speed and distance calculation
     logging.info("Calculating Player Speed and Distance Covered")

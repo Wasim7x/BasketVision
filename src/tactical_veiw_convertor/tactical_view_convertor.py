@@ -116,7 +116,7 @@ class TacticalViewConverter:
                     error = (prop_detected - prop_tactical) / prop_tactical
                     error = abs(error)
 
-                    if error >0.8:  # 80% error margin                        
+                    if error > 0.8:  # 80% error margin                        
                         keypoints_list[frame_idx].xy[0][i] *= 0
                         keypoints_list[frame_idx].xyn[0][i] *= 0
                         invalid_keypoints.append(i)

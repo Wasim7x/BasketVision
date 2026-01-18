@@ -6,3 +6,4 @@ ball_detector_model.pt
 output/
 models/
 logs/
+test.py

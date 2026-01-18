@@ -1,12 +1,12 @@
-import torch
+# import torch
 
-print("Torch version:", torch.__version__)
-print("CUDA available:", torch.cuda.is_available())
+# print("Torch version:", torch.__version__)
+# print("CUDA available:", torch.cuda.is_available())
 
-if torch.cuda.is_available():
-    print("GPU name:", torch.cuda.get_device_name(0))
-else:
-    print("⚠️ Running on CPU")
+# if torch.cuda.is_available():
+#     print("GPU name:", torch.cuda.get_device_name(0))
+# else:
+#     print("⚠️ Running on CPU")
 # import os
 # import argparse
 # # from src.utils import config_reader 

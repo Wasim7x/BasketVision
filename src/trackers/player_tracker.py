@@ -38,7 +38,7 @@ class PlayerTracker:
         detections = [] 
         for i in range(0,len(frames),batch_size):
             device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-            detections_batch = self.model.predict(frames[i:i+batch_size],device=device,conf=0.5)
+            detections_batch = self.model.predict(frames[i:i+batch_size],device=device,conf=0.8)
             detections += detections_batch
         return detections
 
