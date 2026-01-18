@@ -7,6 +7,9 @@ processed frames back to video files, with support for common video formats.
 
 import cv2
 import os
+from src.logger import logging
+from src.exception import MyException   
+import cv2
 
 def read_video(video_path):
     """
@@ -42,6 +45,7 @@ def save_video(ouput_video_frames,output_video_path: str):
         os.makedirs(os.path.dirname(output_video_path), exist_ok=True)
 
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
+    
     out = cv2.VideoWriter(output_video_path, fourcc, 24, (ouput_video_frames[0].shape[1], ouput_video_frames[0].shape[0]))
     for frame in ouput_video_frames:
         out.write(frame)

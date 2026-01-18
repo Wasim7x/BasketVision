@@ -1,3 +1,5 @@
+from src.logger import logging
+from src.exception import MyException
 from ultralytics import YOLO
 import supervision as sv
 import sys 
@@ -51,7 +53,13 @@ class PlayerTracker:
             list: List of dictionaries containing player tracking information for each frame,
                 where each dictionary maps player IDs to their bounding box coordinates.
         """
-        tracks = read_stub(read_from_stub,stub_path)
+        try:
+            tracks = read_stub(read_from_stub,stub_path)
+            logging.info(f"Player tracks loaded from stub: {stub_path}")
+        except Exception as e:
+            logging.info(f"No stub found at {stub_path}, running detection and tracking.")
+            raise MyException(e, sys) from e
+
         if tracks is not None:
             if len(tracks) == len(frames):
                 return tracks

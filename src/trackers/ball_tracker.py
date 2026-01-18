@@ -1,3 +1,5 @@
+from src.logger import logging
+from src.exception import MyException
 from ultralytics import YOLO
 import supervision as sv
 import numpy as np
@@ -46,7 +48,12 @@ class BallTracker:
         Returns:
             list: List of dictionaries containing ball tracking information for each frame.
         """
-        tracks = read_stub(read_from_stub,stub_path)
+        try:
+            tracks = read_stub(read_from_stub,stub_path)
+            logging.info(f"Ball tracks loaded from stub: {stub_path}")
+        except Exception as e:
+            raise MyException(e, sys) from e
+        
         if tracks is not None:
             if len(tracks) == len(frames):
                 return tracks

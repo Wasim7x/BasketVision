@@ -1,0 +1,28 @@
+[ 2026-01-18 15:34:50,127 ] matplotlib - DEBUG - matplotlib data path: D:\project\BasketVision\venv\Lib\site-packages\matplotlib\mpl-data
+[ 2026-01-18 15:34:50,137 ] matplotlib - DEBUG - CONFIGDIR=C:\Users\wasim\.matplotlib
+[ 2026-01-18 15:34:50,153 ] matplotlib - DEBUG - interactive is False
+[ 2026-01-18 15:34:50,153 ] matplotlib - DEBUG - platform is win32
+[ 2026-01-18 15:34:50,197 ] matplotlib - DEBUG - CACHEDIR=C:\Users\wasim\.matplotlib
+[ 2026-01-18 15:34:50,213 ] matplotlib.font_manager - DEBUG - Using fontManager instance from C:\Users\wasim\.matplotlib\fontlist-v390.json
+[ 2026-01-18 15:35:12,517 ] root - INFO - Starting Basketball Video Analysis Pipeline
+[ 2026-01-18 15:35:12,517 ] root - INFO - Configuration loaded from configs\configs.yaml
+[ 2026-01-18 15:35:14,072 ] root - INFO - Video loaded from data\input-videos\Video Project 2.mp4 with 351 frames
+[ 2026-01-18 15:35:14,072 ] root - INFO - Initializing Trackers and Detectors
+[ 2026-01-18 15:35:16,350 ] root - INFO - Running Player and Ball Trackers
+[ 2026-01-18 15:35:16,385 ] root - INFO - Player tracks loaded from stub: stubs\player_tracks_stub.pkl
+[ 2026-01-18 15:35:16,385 ] root - INFO - Running Ball Tracker
+[ 2026-01-18 15:35:16,407 ] root - INFO - Ball tracks loaded from stub: stubs\ball_tracks_stub.pkl
+[ 2026-01-18 15:35:16,407 ] root - INFO - Running Court Keypoint Detector
+[ 2026-01-18 15:35:16,484 ] root - INFO - removing wrong ball detections and interpolating missing positions
+[ 2026-01-18 15:35:16,518 ] root - INFO - Assigning Player Teams based on Jersey Colors
+[ 2026-01-18 15:35:16,585 ] root - INFO - Transforming Player Positions to Tactical View
+[ 2026-01-18 15:35:16,968 ] root - INFO - Calculating Player Speed and Distance Covered
+[ 2026-01-18 15:35:17,003 ] root - INFO - initializing drawers and generating output video
+[ 2026-01-18 15:35:17,003 ] root - INFO - Drawing Player and Ball Tracks on Video Frames
+[ 2026-01-18 15:35:17,659 ] root - INFO - Drawing Ball Tracks on Video Frames
+[ 2026-01-18 15:35:18,481 ] root - INFO - Drawing Court Keypoints on Video Frames
+[ 2026-01-18 15:35:19,456 ] root - INFO - Drawing Team Ball Control on Video Frames
+[ 2026-01-18 15:35:20,103 ] root - INFO - Drawing Pass and Interception Events on Video Frames
+[ 2026-01-18 15:35:20,747 ] root - INFO - Drawing Player Speed and Distance on Video Frames
+[ 2026-01-18 15:35:21,352 ] root - INFO - Drawing Tactical View on Video Frames
+[ 2026-01-18 15:35:23,507 ] root - INFO - Output video saved to output\Video Project 2_output.mp4

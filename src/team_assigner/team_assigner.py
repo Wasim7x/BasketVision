@@ -21,7 +21,7 @@ class TeamAssigner:
     """
     def __init__(self,
                  team_1_class_name= "white shirt",
-                 team_2_class_name= "Red shirt",
+                 team_2_class_name= "dark blue shirt",
                  ):
         """
         Initialize the TeamAssigner with specified team jersey descriptions.
@@ -40,11 +40,8 @@ class TeamAssigner:
         """
         Loads the pre-trained vision model for jersey color classification.
         """
-        # self.model = CLIPModel.from_pretrained("patrickjohncyh/fashion-clip")
-        # self.processor = CLIPProcessor.from_pretrained("patrickjohncyh/fashion-clip")
-        self.model = CLIPModel.from_pretrained("openai/clip-vit-large-patch14-336")
-        self.processor = CLIPProcessor.from_pretrained("openai/clip-vit-large-patch14-336")
-
+        self.model = CLIPModel.from_pretrained("patrickjohncyh/fashion-clip")
+        self.processor = CLIPProcessor.from_pretrained("patrickjohncyh/fashion-clip")
 
     def get_player_color(self,frame,bbox):
         """
@@ -135,8 +132,6 @@ class TeamAssigner:
                                                     player_id)
                 player_assignment[frame_num][player_id] = team
         
-       
-        print(player_assignment[0:10])
-        exit()
         save_stub(stub_path,player_assignment)
+
         return player_assignment

@@ -1,0 +1,6 @@
+input_data_path : "data\\input-videos\\Video Project 2.mp4"
+output_dir : "output"
+models_dir :
+  player_detector : "models\\player_detector (1).pt"
+  ball_detector : "models\\ball_detector_model.pt"
+  court_keypoints_detector : "models\\court_keypoint_detector (1).pt"

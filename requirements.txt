@@ -4,3 +4,4 @@ supervision
 transformers
 pillow
 numpy
+from-root
