@@ -1,3 +1,4 @@
+import torch
 from ultralytics import YOLO
 import supervision as sv
 import sys 
@@ -35,7 +36,8 @@ class CourtKeypointDetector:
         batch_size=20
         court_keypoints = []
         for i in range(0,len(frames),batch_size):
-            detections_batch = self.model.predict(frames[i:i+batch_size],conf=0.5)
+            device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+            detections_batch = self.model.predict(frames[i:i+batch_size],device=device,conf=0.5)
             for detection in detections_batch:
                 court_keypoints.append(detection.keypoints)
 

@@ -2,6 +2,7 @@ from src.logger import logging
 from src.exception import MyException
 from ultralytics import YOLO
 import supervision as sv
+import torch
 import numpy as np
 import pandas as pd
 import sys 
@@ -32,7 +33,8 @@ class BallTracker:
         batch_size=20 
         detections = [] 
         for i in range(0,len(frames),batch_size):
-            detections_batch = self.model.predict(frames[i:i+batch_size],conf=0.5)
+            device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+            detections_batch = self.model.predict(frames[i:i+batch_size],device=device,conf=0.5)
             detections += detections_batch
         return detections
 

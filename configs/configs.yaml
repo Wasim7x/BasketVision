@@ -1,4 +1,4 @@
-input_data_path : "data\\input-videos\\Video Project 2.mp4"
+input_data_path : "D:\\project\\BasketVision\\data\\input-videos\\video_3.mp4"
 output_dir : "output"
 models_dir :
   player_detector : "models\\player_detector (1).pt"

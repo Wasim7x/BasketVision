@@ -22,6 +22,8 @@ from src.drawers import (
     TacticalViewDrawer,
     SpeedAndDistanceDrawer,
 )
+
+
 def arg_parse():
     parser = argparse.ArgumentParser(description="Basketball Video Analysis")
     parser.add_argument(

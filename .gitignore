@@ -5,3 +5,4 @@ ball_detector_model.pt
 .env
 output/
 models/
+logs/
