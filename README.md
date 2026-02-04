@@ -44,17 +44,16 @@ output_videos/
 └── sample_output.mp4
 ```
 
-You can also attach a YouTube demo:
-
 ```
-[![Demo Video](thumbnail_link)](youtube_video_link)
+[![Demo Video](https://img.youtube.com/vi/fPtZyoS8Qns/0.jpg)](https://youtu.be/fPtZyoS8Qns)
+
 ```
 
 ---
 
 ## 🔧 Prerequisites
 
-- Python **3.8+**
+- Python **3.10+**
 - pip / virtualenv / conda
 - (Optional) **Docker** for containerized execution
 - GPU recommended for real-time or faster inference
