@@ -37,17 +37,14 @@ The project integrates **YOLO-based object detection**, **tracking**, and **cust
 
 ## 🎮 Demo / Sample Output
 
-> 📍 Place your **sample output video or GIF** here
 
 ```text
 output_videos/
 └── sample_output.mp4
 ```
 
-```
 [![Demo Video](https://img.youtube.com/vi/fPtZyoS8Qns/0.jpg)](https://youtu.be/fPtZyoS8Qns)
 
-```
 
 ---
 
